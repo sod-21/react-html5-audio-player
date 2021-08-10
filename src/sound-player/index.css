@@ -1,23 +1,20 @@
-.sound-player-wrapper
-{
+.sound-player-wrapper {
     position: relative;
     width: 100%;
     min-width: 320px;
 }
 
-.sound-player-wrapper *{
+.sound-player-wrapper * {
     box-sizing: border-box;
 }
 
-.sound-player-wrapper .snd-player
-{
+.sound-player-wrapper .snd-player {
     position: relative;
     height: 100%;
     z-index: 3;
 }
 
-.sound-player-wrapper .player-track
-{
+.sound-player-wrapper .player-track {
     position: absolute;
     top: 0;
     right: 15px;
@@ -29,27 +26,23 @@
     text-align: left;
 }
 
-.sound-player-wrapper .player-track.active
-{
+.sound-player-wrapper .player-track.active {
     top: -96px;
 }
 
-.sound-player-wrapper .album-name
-{
+.sound-player-wrapper .album-name {
     color: #04a1fb;
     font-size: 17px;
     font-weight: bold;
 }
 
-.sound-player-wrapper .track-name
-{
+.sound-player-wrapper .track-name {
     color: #acaebd;
     font-size: 13px;
     margin: 2px 0 13px 0;
 }
 
-.sound-player-wrapper .track-time
-{
+.sound-player-wrapper .track-time {
     height: 12px;
     margin-bottom: 3px;
     overflow: hidden;
@@ -57,8 +50,8 @@
     justify-content: space-between;
 }
 
-.sound-player-wrapper .current-time, .sound-player-wrapper .track-length
-{
+.sound-player-wrapper .current-time,
+.sound-player-wrapper .track-length {
     color: transparent;
     font-size: 11px;
     background-color: #ffe8ee;
@@ -66,29 +59,25 @@
     transition: 0.3s ease all;
 }
 
-.sound-player-wrapper .track-time.active .current-time, 
-.sound-player-wrapper .track-time.active .track-length
-{
+.sound-player-wrapper .track-time.active .current-time,
+.sound-player-wrapper .track-time.active .track-length {
     color: #009dfb;
     background-color: transparent;
 }
 
-.sound-player-wrapper .s-area, 
-.sound-player-wrapper .seek-bar
-{
+.sound-player-wrapper .s-area,
+.sound-player-wrapper .seek-bar {
     position: relative;
     height: 4px;
     border-radius: 4px;
 }
 
-.sound-player-wrapper .s-area
-{
-    background-color:#d7f0ff;
+.sound-player-wrapper .s-area {
+    background-color: #d7f0ff;
     cursor: pointer;
 }
 
-.sound-player-wrapper .ins-time
-{
+.sound-player-wrapper .ins-time {
     position: absolute;
     top: -29px;
     color: #fff;
@@ -96,12 +85,11 @@
     white-space: pre;
     padding: 5px 6px;
     border-radius: 4px;
-	display:none;
+    display: none;
     margin-left: -21px;
 }
 
-.sound-player-wrapper .s-hover
-{
+.sound-player-wrapper .s-hover {
     position: absolute;
     top: 0;
     bottom: 0;
@@ -111,13 +99,11 @@
 }
 
 .sound-player-wrapper .ins-time,
-.sound-player-wrapper .s-hover
-{
+.sound-player-wrapper .s-hover {
     background-color: #3b3d50;
 }
 
-.sound-player-wrapper .seek-bar
-{
+.sound-player-wrapper .seek-bar {
     content: '';
     position: absolute;
     top: 0;
@@ -129,17 +115,15 @@
     z-index: 1;
 }
 
-.sound-player-wrapper .snd-player-content
-{
-    position: relative;    
+.sound-player-wrapper .snd-player-content {
+    position: relative;
     background-color: #fff;
     box-shadow: 0 30px 80px #656565;
     z-index: 2;
-    display: flex;    
+    display: flex;
 }
 
-.sound-player-wrapper .album-art
-{
+.sound-player-wrapper .album-art {
     position: absolute;
     top: -40px;
     width: 115px;
@@ -152,14 +136,12 @@
     overflow: hidden;
 }
 
-.sound-player-wrapper .album-art.active
-{
+.sound-player-wrapper .album-art.active {
     top: -60px;
     box-shadow: 0 0 0 4px #fff7f7, 0 30px 50px -15px #afb7c1;
 }
 
-.sound-player-wrapper .album-art:before
-{
+.sound-player-wrapper .album-art:before {
     content: '';
     position: absolute;
     top: 50%;
@@ -174,8 +156,7 @@
     z-index: 2;
 }
 
-.sound-player-wrapper .album-art img
-{
+.sound-player-wrapper .album-art img {
     display: block;
     position: absolute;
     top: 0;
@@ -186,26 +167,26 @@
     z-index: -1;
 }
 
-.sound-player-wrapper .album-art img.active
-{
+.sound-player-wrapper .album-art img.active {
     opacity: 1;
     z-index: 1;
 }
 
-.sound-player-wrapper .album-art.active img.active
-{
+.sound-player-wrapper .album-art.active img.active {
     z-index: 1;
     animation: rotateAlbumArt 3s linear 0s infinite forwards;
 }
 
-@keyframes rotateAlbumArt
-{
-    0%{ transform: rotateZ(0); }
-    100%{ transform: rotateZ(360deg); }
+@keyframes rotateAlbumArt {
+    0% {
+        transform: rotateZ(0);
+    }
+    100% {
+        transform: rotateZ(360deg);
+    }
 }
 
-.sound-player-wrapper .buffer-box
-{
+.sound-player-wrapper .buffer-box {
     position: absolute;
     top: 50%;
     right: 0;
@@ -225,44 +206,37 @@
 }
 
 .sound-player-wrapper .album-art img,
-.sound-player-wrapper  .buffer-box
-{
+.sound-player-wrapper .buffer-box {
     transition: 0.1s linear all;
 }
 
-.sound-player-wrapper .sound-player-wrapper .album-art.buffering img
-{
+.sound-player-wrapper .sound-player-wrapper .album-art.buffering img {
     opacity: 0.25;
 }
 
-.sound-player-wrapper .album-art.buffering img.active
-{
+.sound-player-wrapper .album-art.buffering img.active {
     opacity: 0.8;
     filter: blur(2px);
     -webkit-filter: blur(2px);
 }
 
-.sound-player-wrapper .album-art.buffering .buffer-box
-{
+.sound-player-wrapper .album-art.buffering .buffer-box {
     opacity: 1;
 }
 
-.sound-player-wrapper .sound-player-controls
-{
-    margin: 10px 5px 10px auto; 
+.sound-player-wrapper .sound-player-controls {
+    margin: 10px 5px 10px auto;
     overflow: hidden;
     display: flex;
 }
-
 
 .sound-player-wrapper .sound-player-controls .control {
     flex: 1 0 auto;
 }
 
-.sound-player-wrapper .snd-button
-{
+.sound-player-wrapper .snd-button {
     width: 80px;
-    height: 80px;        
+    height: 80px;
     background-color: #fff;
     cursor: pointer;
     display: flex;
@@ -270,19 +244,16 @@
     align-items: center;
 }
 
-.sound-player-wrapper .snd-button, 
-.sound-player-wrapper .snd-button svg
-{
+.sound-player-wrapper .snd-button,
+.sound-player-wrapper .snd-button svg {
     transition: 0.3s ease all;
 }
 
-.sound-player-wrapper .snd-button:hover
-{
+.sound-player-wrapper .snd-button:hover {
     background-color: #00a2ff;
 }
 
-.sound-player-wrapper .snd-button:hover path
-{
+.sound-player-wrapper .snd-button:hover path {
     fill: #fff;
 }
 
@@ -293,20 +264,17 @@
 }
 
 @media only screen and (max-width: 500px) {
-
     .sound-player-wrapper .track-name {
         height: 20px;
         overflow: hidden;
         text-overflow: ellipsis;
     }
-
     .sound-player-wrapper .snd-button {
         width: 50px;
         height: 50px;
     }
-
     .sound-player-wrapper .sound-player-controls {
-        margin: 25px 5px 25px auto; 
+        margin: 25px 5px 25px auto;
     }
 }
 
@@ -347,9 +315,9 @@
         top: 8px;
         height: 64px;
     }
-    50%, 100% {
+    50%,
+    100% {
         top: 24px;
         height: 32px;
     }
 }
-  
