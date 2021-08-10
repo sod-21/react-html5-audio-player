@@ -52,6 +52,7 @@ function SoundPlayer(props) {
 
         if (isNaN(ctMinutes) || isNaN(ctSeconds)) {
             insTime.textContent = "--:--";
+            return;
         }
         else {
             insTime.textContent = ctMinutes + ':' + ctSeconds;
@@ -148,8 +149,14 @@ function SoundPlayer(props) {
                     }
                 }
                 else {
-                    if (snd_player.current)
+                    if (snd_player.current) {
                         snd_player.current.querySelector(".album-art").classList.remove("buffering");
+                        snd_player.current.querySelector(".track-time").classList.add("active");
+                    }
+                }
+
+                if (audio.current && audio.current.paused) {
+                    audio.current.play();
                 }
             }, BUFFER_DELPAY);
 
@@ -209,10 +216,6 @@ function SoundPlayer(props) {
 
         SetCurrent(currIndex);
 
-        if (!flag) {
-            setPlay(false);
-        }
-
         setSeek({
             width: 0,
             currentTime: 0,
@@ -222,15 +225,14 @@ function SoundPlayer(props) {
             dur_sec: "00"
         });
 
-        if (flag >= 0) {
+        if (flag != 0) {
             setPlay(true);
         }
     }
 
     const playFromClickedPos = () => {
 
-        const cM = currentTime;
-        console.log(currentTime);
+        const cM = currentTime;        
         let ctMinutes = Math.floor(cM);
         let ctSeconds = Math.floor((cM - ctMinutes) * 60);
 
@@ -250,10 +252,12 @@ function SoundPlayer(props) {
         newSeek.cur_min = ctMinutes;
         newSeek.cur_sec = ctSeconds;
 
-        audio.current.pause();
-        audio.current.currentTime = parseInt(ctMinutes) * 60 + parseInt(ctSeconds);
+        if (audio.current) {
+            audio.current.pause();
+            audio.current.currentTime = parseInt(ctMinutes) * 60 + parseInt(ctSeconds) - 5;
 
-        audio.current.play();
+            audio.current.play();
+        }
         setSeek(newSeek);
         handleMouseOut();
     };
