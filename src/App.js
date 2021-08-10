@@ -1,7 +1,18 @@
 import logo from './logo.svg';
 import './App.css';
+import SoundPlayer from "./sound-player/index";
+import {useEffect, useState} from 'react';
 
+const initialState = [];
+
+const api = "https://app.fakejson.com/q/4Xsxdy6s?token=94hEBwhPCWJS5epYIXSbww";
 function App() {
+  const [sounds, setSounds] = useState(initialState);
+
+  useEffect(() => {
+    fetch(api).then((res) => res.json()).then(data => setSounds(data.album));
+  }, []);
+
   return (
     <div className="App">
       <header className="App-header">
@@ -9,14 +20,9 @@ function App() {
         <p>
           Edit <code>src/App.js</code> and save to reload.
         </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+        <div className="container">
+          <SoundPlayer list={sounds}></SoundPlayer>
+        </div>
       </header>
     </div>
   );
