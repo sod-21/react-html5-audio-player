@@ -29,11 +29,15 @@ function SoundPlayer(props) {
 
     const handleMouseOver = (event) => {
         const sArea = snd_player.current.querySelector(".s-area");
-        const insTime = snd_player.current.querySelector(".ins-time")
-        const seekBarPos = sArea.offsetLeft;
+        const insTime = snd_player.current.querySelector(".ins-time");
+        const sHover = snd_player.current.querySelector(".s-hover");
+        const rect = sArea.getBoundingClientRect();
+
+        const seekBarPos = rect.left + window.scrollX;       
         const seekT = event.clientX - seekBarPos;
         const seekLoc = audio.current.duration * (seekT / sArea.offsetWidth);
 
+        sHover.style.width =  seekT + "px";
         const cM = seekLoc / 60;
 
         let ctMinutes = Math.floor(cM);
@@ -254,7 +258,7 @@ function SoundPlayer(props) {
 
         if (audio.current) {
             audio.current.pause();
-            audio.current.currentTime = parseInt(ctMinutes) * 60 + parseInt(ctSeconds) - 5;
+            audio.current.currentTime = parseInt(ctMinutes) * 60 + parseInt(ctSeconds);
 
             audio.current.play();
         }

@@ -23,6 +23,9 @@ function App() {
         <div className="container">
           <SoundPlayer list={sounds}></SoundPlayer>
         </div>
+        <div style={{marginTop: "30px"}}>
+          <a href="https://github.com/sod-21/react-html5-audio-player">Goto the Github.</a>
+        </div>
       </header>
     </div>
   );
