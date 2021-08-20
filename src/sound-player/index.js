@@ -24,7 +24,8 @@ function SoundPlayer(props) {
     const [play, setPlay] = useState(false);
     const [seek, setSeek] = useState(initialSeek);
     const [currentTime, setCurrentTime] = useState(0);
-    const audio = useRef(new Audio(list.length ? list[current].url : ""));
+    const [audio, setAudio] = useState(new Audio(list.length ? list[current].url : ""));
+
     const uuid = useMemo(() => (uniqueId("sound-player")), []);
 
     const handleMouseOver = (event) => {
@@ -35,7 +36,7 @@ function SoundPlayer(props) {
 
         const seekBarPos = rect.left + window.scrollX;       
         const seekT = event.clientX - seekBarPos;
-        const seekLoc = audio.current.duration * (seekT / sArea.offsetWidth);
+        const seekLoc = audio.duration * (seekT / sArea.offsetWidth);
 
         sHover.style.width =  seekT + "px";
         const cM = seekLoc / 60;
@@ -70,13 +71,13 @@ function SoundPlayer(props) {
     const timeupdate = (event) => {
 
 
-        let curMinutes = Math.floor(audio.current.currentTime / 60);
-        let curSeconds = Math.floor(audio.current.currentTime - curMinutes * 60);
+        let curMinutes = Math.floor(audio.currentTime / 60);
+        let curSeconds = Math.floor(audio.currentTime - curMinutes * 60);
 
-        let durMinutes = Math.floor(audio.current.duration / 60);
-        let durSeconds = Math.floor(audio.current.duration - durMinutes * 60);
+        let durMinutes = Math.floor(audio.duration / 60);
+        let durSeconds = Math.floor(audio.duration - durMinutes * 60);
 
-        const playProgress = (audio.current.currentTime / audio.current.duration) * 100;
+        const playProgress = (audio.currentTime / audio.duration) * 100;
 
         if (curMinutes < 10)
             curMinutes = '0' + curMinutes;
@@ -143,10 +144,10 @@ function SoundPlayer(props) {
         };
 
         if (play) {
-            const nTime = audio.current.currentTime;
+            const nTime = audio.currentTime;
             timer.buffering = setInterval(() => {
 
-                if (nTime >= 0 && nTime === audio.current.currentTime) {
+                if (nTime >= 0 && nTime === audio.currentTime) {
                     if (snd_player.current) {
                         snd_player.current.querySelector(".album-art").classList.add("buffering");
                         snd_player.current.querySelector(".track-time").classList.remove("active");
@@ -159,8 +160,8 @@ function SoundPlayer(props) {
                     }
                 }
 
-                if (audio.current && audio.current.paused) {
-                    audio.current.play();
+                if (audio && audio.paused) {
+                    audio.play();
                 }
             }, BUFFER_DELPAY);
 
@@ -174,15 +175,17 @@ function SoundPlayer(props) {
 
     useEffect(() => {
         if (list.length) {
-            audio.current.src = list[current].url;
+            audio.src = list[current].url;
+                    
         }
 
-        if (audio.current) {
-            audio.current.removeEventListener("timeupdate", timeupdate);
-            audio.current.addEventListener("timeupdate", timeupdate);
+        if (audio) {            
+            audio.removeEventListener("timeupdate", timeupdate);
+            audio.addEventListener("timeupdate", timeupdate);
+            setAudio(audio);
 
             return () => {
-                audio.current.removeEventListener("timeupdate", timeupdate);
+                audio.removeEventListener("timeupdate", timeupdate);
             }
         }
     }, [list, current]);
@@ -194,13 +197,13 @@ function SoundPlayer(props) {
 
         if (!play) {
             setPlay(true);
-            if (audio.current)
-                audio.current.play();
+            if (audio)
+                audio.play();
         }
         else {
             setPlay(false);
-            if (audio.current)
-                audio.current.pause();
+            if (audio)
+                audio.pause();
         }
 
     }, DEBOUNCE_DELAY), [play, list]);
@@ -256,11 +259,11 @@ function SoundPlayer(props) {
         newSeek.cur_min = ctMinutes;
         newSeek.cur_sec = ctSeconds;
 
-        if (audio.current) {
-            audio.current.pause();
-            audio.current.currentTime = parseInt(ctMinutes) * 60 + parseInt(ctSeconds);
+        if (audio) {
+            audio.pause();
+            audio.currentTime = parseInt(ctMinutes) * 60 + parseInt(ctSeconds);
 
-            audio.current.play();
+            audio.play();
         }
         setSeek(newSeek);
         handleMouseOut();
